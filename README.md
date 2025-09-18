@@ -16,7 +16,7 @@ _-
 
 ## DEPLOY NEW VERSION
 
-<p align="center"><strong>⚡ VERSION 5.0</strong></p>
+<p align="center"><strong>⚡ VERSION 2.0</strong></p>
 
 <p align="center">
   <a href="https://github.com/dawens8/MINI-JESUS-CRASH" target="_blank">
