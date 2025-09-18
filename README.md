@@ -138,8 +138,8 @@ _-
 <hr>
 <p align="center"><i>✨ Keep your bot updated regularly to enjoy the latest features and patches.</i></p>
 
----
-'' 
+``` DEPLOY ON WORKFLOW ⚡
+
 name: Node.js CI
 
 on:
@@ -183,8 +183,7 @@ jobs:
     - name: Save state (Optional)
       run: |
         ./save_state.sh
-
-        ---
+```
 
 ## 💗 MINI-JESUS-CRASH Features
 
