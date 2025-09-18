@@ -20,7 +20,7 @@ const {
     jidDecode,
     fetchLatestBaileysVersion,
     Browsers
-  } = require(config.BAILEYS)
+  const baileysModule = config.BAILEYS || "@whiskeysockets/baileys";
   
   
   const l = console.log
