@@ -115,7 +115,6 @@ async function loadSession() {
         return null;
     }
 }
-
 //=======SESSION-AUTH==============
 
 async function connectToWA() {
