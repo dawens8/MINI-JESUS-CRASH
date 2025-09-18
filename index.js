@@ -1,26 +1,32 @@
 const config = require('./config')
+
+// Premye defini module
+const baileysModule = config.BAILEYS || "@whiskeysockets/baileys"
+
+// Apre sa fè destructuring
 const {
   default: makeWASocket,
-    useMultiFileAuthState,
-    DisconnectReason,
-    jidNormalizedUser,
-    isJidBroadcast,
-    getContentType,
-    proto,
-    generateWAMessageContent,
-    generateWAMessage,
-    AnyMessageContent,
-    prepareWAMessageMedia,
-    areJidsSameUser,
-    downloadContentFromMessage,
-    MessageRetryMap,
-    generateForwardMessageContent,
-    generateWAMessageFromContent,
-    generateMessageID, makeInMemoryStore,
-    jidDecode,
-    fetchLatestBaileysVersion,
-    Browsers
-  const baileysModule = config.BAILEYS || "@whiskeysockets/baileys";
+  useMultiFileAuthState,
+  DisconnectReason,
+  jidNormalizedUser,
+  isJidBroadcast,
+  getContentType,
+  proto,
+  generateWAMessageContent,
+  generateWAMessage,
+  AnyMessageContent,
+  prepareWAMessageMedia,
+  areJidsSameUser,
+  downloadContentFromMessage,
+  MessageRetryMap,
+  generateForwardMessageContent,
+  generateWAMessageFromContent,
+  generateMessageID,
+  makeInMemoryStore,
+  jidDecode,
+  fetchLatestBaileysVersion,
+  Browsers
+} = require(baileysModule)
   
   
   const l = console.log
