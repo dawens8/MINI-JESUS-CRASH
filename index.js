@@ -94,26 +94,21 @@ async function loadSession() {
             return null;
         }
 
-        console.log('[⏳] Downloading creds data...');
-        console.log('[🔰] Downloading MEGA.nz session...');
+        console.log('[⏳] Loading creds data from SESSION_ID...');
         
-        // Remove "IK~" prefix if present, otherwise use full SESSION_ID
-        const megaFileId = config.SESSION_ID.startsWith('JESUS~CRASH~V1~') 
+        // Retire prefix si li egziste
+        const sessdata = config.SESSION_ID.startsWith('JESUS~CRASH~V1~') 
             ? config.SESSION_ID.replace("JESUS~CRASH~V1~", "") 
             : config.SESSION_ID;
 
-        const filer = File.fromURL(`https://mega.nz/file/${megaFileId}`);
-            
-        const data = await new Promise((resolve, reject) => {
-            filer.download((err, data) => {
-                if (err) reject(err);
-                else resolve(data);
-            });
-        });
+        // Dekode Base64
+        const json = Buffer.from(sessdata, 'base64').toString('utf-8');
+
+        // Ekri creds.json
+        fs.writeFileSync(credsPath, json);
+        console.log('[✅] Session loaded successfully');
         
-        fs.writeFileSync(credsPath, data);
-        console.log('[✅] MEGA session downloaded successfully');
-        return JSON.parse(data.toString());
+        return JSON.parse(json);
     } catch (error) {
         console.error('❌ Error loading session:', error.message);
         console.log('Will generate QR code instead');
