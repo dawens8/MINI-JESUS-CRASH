@@ -10,7 +10,7 @@
 <h2 align="center">📊 MINI-JESUS Analytics </h2> 
 _-
 
-> **Deploy New Version `5.0.0`**  
+> **Deploy New Version `2.0.0`**  
 
 ---
 
