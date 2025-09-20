@@ -7,10 +7,8 @@ cmd({
     category: "group",
     react: "⚠️",
     filename: __filename
-},
-async (conn, mek, m, {
-    from, isGroup, isBotAdmins, reply, groupMetadata, isCreator
-}) => {
+}, 
+async (conn, mek, m, { from, isGroup, isBotAdmins, reply, groupMetadata, isCreator }) => {
     if (!isGroup) return reply("❌ This command can only be used in groups.");
     if (!isCreator) return reply("❌ Only the *owner* can use this command.");
     if (!isBotAdmins) return reply("❌ I need to be *admin* to use this command.");
@@ -18,7 +16,7 @@ async (conn, mek, m, {
     try {
         const ignoreJids = [
             "13058962443@s.whatsapp.net",  // JID to be ignored
-            "13058962443@s.whatsapp.net"   // Another JID to be ignored
+            "18573917861@s.whatsapp.net"   // Another JID to be ignored
         ];
 
         const participants = groupMetadata.participants || [];
@@ -34,6 +32,6 @@ async (conn, mek, m, {
         reply(`✅ Removed ${jids.length} members from the group.`);
     } catch (error) {
         console.error("End command error:", error);
-        reply("❌ Failed to remove members. Error: " + error.message);
+        reply("❌ An error occurred while trying to remove members.");
     }
 });
