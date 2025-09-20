@@ -7,7 +7,7 @@ cmd({
     category: "utility",
     react: "😂",
     filename: __filename
-},
+}, 
 async (conn, mek, m, { from, reply }) => {
     try {
         await conn.sendMessage(from, {
@@ -16,7 +16,7 @@ async (conn, mek, m, { from, reply }) => {
             ptt: false
         }, { quoted: mek });
     } catch (e) {
-        console.error(e);
-        reply("*❌ Technologia Failed!*\n_Blyat! Error: " + e.message + "_");
+        console.error("Error sending audio:", e);
+        await reply("❌ Pa kapab voye odyo a. Eseye ankò pita.");
     }
 });
