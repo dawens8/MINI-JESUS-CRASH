@@ -5,9 +5,9 @@ const { cmd } = require('../command');
 cmd({
     pattern: "ping",
     alias: ["speed", "pong", "status"],
-    desc: "Check bot's response time, RAM usage and uptime.",
-    category: "main",
-    use: '.ping',
+    desc: "🏓 Check bot's response time, RAM usage and uptime.",
+    category: "main",   // chanje pou yon kategori ki egziste
+    use: ".ping",
     filename: __filename
 },
 async (conn, mek, m, { from }) => {
