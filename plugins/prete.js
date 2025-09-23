@@ -4,7 +4,7 @@ const { Sticker, StickerTypes } = require('wa-sticker-formatter');
 cmd({
   pattern: 'pretem',
   desc: 'Re-send any sticker as yours (with custom packname)',
-  category: 'spam',
+  category: 'main',
   react: '🎭',
   filename: __filename
 }, async (bot, mek, m, { reply }) => {
