@@ -4,55 +4,50 @@ const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, 
 
 cmd({
     pattern: "tagall",
-    react: "🔊",
-    alias: ["gc_tagall"],
-    desc: "To Tag all Members",
+    react: "⚡",
+    alias: ["😹", "gc_tagall"],
+    desc: "Dark styled Tag All",
     category: "group",
-    use: '.tagall [message]',
+    use: ".tagall [message]",
     filename: __filename
 },
-async (conn, mek, m, { from, participants, reply, isGroup, isAdmins, isCreator, prefix, command, args, body }) => {
+async (conn, mek, m, { from, participants, reply, isGroup, isAdmins, isCreator, args }) => {
     try {
-        // ✅ Group check
-        if (!isGroup) {
-            await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
-            return reply("❌ This command can only be used in groups.");
-        }
+        if (!isGroup) return reply("❌ This command only works in groups!");
+        if (!isAdmins && !isCreator) return reply("❌ Only admins or the owner can use this command.");
 
-        // ✅ Permission check (Admin OR Bot Owner)
-        if (!isAdmins && !isCreator) {
-            await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
-            return reply("❌ Only group admins or the bot owner can use this command.");
-        }
+        let groupInfo = await conn.groupMetadata(from);
+        let groupName = groupInfo.subject || "Unnamed Group";
+        let totalMembers = participants.length;
 
-        // ✅ Fetch group info
-        let groupInfo = await conn.groupMetadata(from).catch(() => null);
-        if (!groupInfo) return reply("❌ Failed to fetch group information.");
+        let customMsg = args.length > 0 ? args.join(" ") : "⚠ ATTENTION ALL MEMBERS ⚠";
 
-        let groupName = groupInfo.subject || "Unknown Group";
-        let totalMembers = participants ? participants.length : 0;
-        if (totalMembers === 0) return reply("❌ No members found in this group.");
+        let teks = `
+╔═══❖•ೋ° °ೋ•❖═══╗
+      𝐌𝐈𝐍𝐈-𝐉𝐄𝐒𝐔𝐒-𝐂𝐑𝐀𝐒𝐇
+╚═══❖•ೋ° °ೋ•❖═══╝
 
-        let emojis = ['📢', '🔊', '🌐', '🔰', '❤‍🩹', '🤍', '🖤', '🩵', '📝', '💗', '🔖', '🪩', '📦', '🎉', '🛡️', '💸', '⏳', '🗿', '🚀', '🎧', '🪀', '⚡', '🚩', '🍁', '🗣️', '👻', '⚠️', '🔥'];
-        let randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+🕷 GROUP : *${groupName}*
+🌑 MEMBERS : *${totalMembers}*
+⚡ MESSAGE : *${customMsg}*
 
-        // ✅ Extract message
-        let message = body.slice(body.indexOf(command) + command.length).trim();
-        if (!message) message = "Attention Everyone";
+━━━━━━━━━━━━━━━ DARK BROADCAST ━━━━━━━━━━━━━━━
 
-        let teks = `▢ Group : *${groupName}*\n▢ Members : *${totalMembers}*\n▢ Message: *${message}*\n\n┌───⊷ *MENTIONS*\n`;
+`;
 
         for (let mem of participants) {
-            if (!mem.id) continue;
-            teks += `${randomEmoji} @${mem.id.split('@')[0]}\n`;
+            teks += `•ೋ°𝐌𝐈𝐍𝐈-𝐉𝐄𝐒𝐔𝐒 @${mem.id.split('@')[0]}\n`;
         }
 
-        teks += "└──✪ MINI ┃ JESUS ✪──";
+        teks += `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚔️  POWERED BY: 𝐌𝐈𝐍𝐈-𝐉𝐄𝐒𝐔𝐒-𝐂𝐑𝐀𝐒𝐇  
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
 
-        conn.sendMessage(from, { text: teks, mentions: participants.map(a => a.id) }, { quoted: mek });
+        await conn.sendMessage(from, { text: teks, mentions: participants.map(p => p.id) }, { quoted: mek });
 
     } catch (e) {
-        console.error("TagAll Error:", e);
-        reply(`❌ *Error Occurred !!*\n\n${e.message || e}`);
+        console.error("Dark TagAll Error:", e);
+        reply(`❌ Error: ${e.message}`);
     }
 });
