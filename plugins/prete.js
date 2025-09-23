@@ -2,7 +2,7 @@ const { cmd } = require('../command');
 const { Sticker, StickerTypes } = require('wa-sticker-formatter');
 
 cmd({
-  pattern: 'pretem',
+  pattern: '🤚🏻',
   desc: 'Re-send any sticker as yours (with custom packname)',
   category: 'main',
   react: '🎭',
