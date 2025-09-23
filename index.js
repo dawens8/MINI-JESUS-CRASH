@@ -97,8 +97,8 @@ async function loadSession() {
         console.log('[⏳] Loading creds data from SESSION_ID...');
         
         // Retire prefix si li egziste
-        const sessdata = config.SESSION_ID.startsWith('JESUS~CRASH~V1~') 
-            ? config.SESSION_ID.replace("JESUS~CRASH~V1~", "") 
+        const sessdata = config.SESSION_ID.startsWith('ANTAGONISTE~MD~') 
+            ? config.SESSION_ID.replace("ANTAGONISTE~MD~", "") 
             : config.SESSION_ID;
 
         // Dekode Base64
