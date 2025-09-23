@@ -1,59 +1,73 @@
 const config = require('../config')
 const { cmd } = require('../command')
-const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('../lib/functions')
+const { fetchJson } = require('../lib/functions')
 
 cmd({
     pattern: "ginfo",
     react: "🥏",
     alias: ["groupinfo"],
-    desc: "Get group information.",
+    desc: "Get group informations.",
     category: "group",
     use: '.ginfo',
     filename: __filename
 },
 async (conn, mek, m, {
-    from, quoted, isCmd, isGroup, sender, isBotAdmins,
-    isAdmins, isDev, reply, groupMetadata, participants
+    from, isGroup, isAdmins, isBotAdmins, participants, groupMetadata, reply, isDev, isOwner
 }) => {
     try {
-        // Requirements
-        if (!isGroup) return reply(`❌ This command only works in group chats.`);
-        if (!isAdmins && !isDev) return reply(`⛔ Only *Group Admins* or *Bot Dev* can use this.`);
-        if (!isBotAdmins) return reply(`❌ I need *admin* rights to fetch group details.`);
-
-        const fallbackPpUrls = [
-            'https://i.ibb.co/KhYC4FY/1221bc0bdd2354b42b293317ff2adbcf-icon.png',
-            'https://i.ibb.co/KhYC4FY/1221bc0bdd2354b42b293317ff2adbcf-icon.png',
-        ];
-        let ppUrl;
-        try {
-            ppUrl = await conn.profilePictureUrl(from, 'image');
-        } catch {
-            ppUrl = fallbackPpUrls[Math.floor(Math.random() * fallbackPpUrls.length)];
+        // Messages par défaut
+        let msr = {
+            only_gp: "This command can only be used in groups.",
+            you_adm: "You must be an admin to use this command.",
+            give_adm: "Please make the bot admin first."
         }
 
-        const metadata = await conn.groupMetadata(from);
-        const groupAdmins = participants.filter(p => p.admin);
-        const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
-        const owner = metadata.owner || groupAdmins[0]?.id || "unknown";
+        // Essaye de charger les messages personnalisés
+        try {
+            const res = await fetchJson('https://raw.githubusercontent.com/JawadTech3/KHAN-DATA/refs/heads/main/MSG/mreply.json')
+            if (res?.replyMsg) msr = res.replyMsg
+        } catch (e) {
+            console.log('⚠️ Failed to load remote messages, using default ones.')
+        }
 
-        const gdata = `*「 Group Information 」*\n
-*Group Name* : ${metadata.subject}
-*Group ID* : ${metadata.id}
-*Participants* : ${metadata.size}
-*Group Creator* : @${owner.split('@')[0]}
-*Description* : ${metadata.desc?.toString() || 'No description'}\n
-*Admins (${groupAdmins.length})*:\n${listAdmin}`
+        if (!isGroup) return reply(msr.only_gp)
+        if (!isAdmins && !isDev && !isOwner) return reply(msr.you_adm)
+        if (!isBotAdmins) return reply(msr.give_adm)
+
+        // Récupération de la photo du groupe
+        let ppUrl
+        try {
+            ppUrl = await conn.profilePictureUrl(from, 'image')
+        } catch {
+            ppUrl = 'https://i.ibb.co/KhYC4FY/1221bc0bdd2354b42b293317ff2adbcf-icon.png'
+        }
+
+        const metadata = await conn.groupMetadata(from)
+        const groupAdmins = participants.filter(p => p.admin)
+        const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n')
+        const owner = metadata.owner || groupAdmins[0]?.id || 'unknown'
+
+        const gdata = `*「 Group Information 」*
+
+*Group Name:* ${metadata.subject}
+*Group JID:* ${metadata.id}
+*Participants:* ${metadata.size}
+*Group Owner:* ${owner !== 'unknown' ? '@' + owner.split('@')[0] : 'unknown'}
+*Description:* ${metadata.desc?.toString() || 'undefined'}
+
+*Admins:*
+${listAdmin}
+        `
 
         await conn.sendMessage(from, {
             image: { url: ppUrl },
             caption: gdata,
-            mentions: groupAdmins.map(v => v.id).concat([owner])
-        }, { quoted: mek });
+            mentions: groupAdmins.map(a => a.id).concat(owner !== 'unknown' ? [owner] : [])
+        }, { quoted: mek })
 
     } catch (e) {
-        console.error(e);
-        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
-        reply(`❌ An error occurred:\n\n${e}`);
+        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } })
+        console.log(e)
+        reply(`❌ *Error Accurated !!*\n\n${e}`)
     }
-});
+})

@@ -10,12 +10,12 @@ function replaceYouTubeID(url) {
 }
 
 cmd({
-    pattern: "song",
-    alias: ["mp4", "video"],
-    react: "🎬",
-    desc: "Download Ytmp4",
+    pattern: "play",
+    alias: ["mp3", "ytmp3"],
+    react: "🎵",
+    desc: "Download Ytmp3",
     category: "download",
-    use: ".video <Text or YT URL>",
+    use: ".song <Text or YT URL>",
     filename: __filename
 }, async (conn, m, mek, { from, q, reply }) => {
     try {
@@ -35,28 +35,28 @@ cmd({
             videoData = searchResults.results[0];
         }
 
-        // Préchargement du MP4
-        const preloadedVideo = dy_scrap.ytmp4(`https://youtube.com/watch?v=${id}`);
+        // Pré-chargement du MP3
+        const preloadedAudio = dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
 
         const { url, title, image, timestamp, ago, views, author } = videoData;
 
-        let info = `🎥 *𝚅𝙸𝙳𝙴𝙾 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙴𝚁* 🎥\n\n` +
-            `🎬 *Title:* ${title || "Unknown"}\n` +
-            `⏱ *Duration:* ${timestamp || "Unknown"}\n` +
-            `👁 *Views:* ${views || "Unknown"}\n` +
-            `📅 *Release Ago:* ${ago || "Unknown"}\n` +
+        let info = `🍄 *𝚂𝙾𝙽𝙶 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙴𝚁* 🍄\n\n` +
+            `🎵 *Title:* ${title || "Unknown"}\n` +
+            `⏳ *Duration:* ${timestamp || "Unknown"}\n` +
+            `👀 *Views:* ${views || "Unknown"}\n` +
+            `🌏 *Release Ago:* ${ago || "Unknown"}\n` +
             `👤 *Author:* ${author?.name || "Unknown"}\n` +
-            `🔗 *Url:* ${url || "Unknown"}\n\n` +
-            `🎞 *Reply with your choice:*\n` +
-            `2.1 *Video Type* 🎬\n` +
-            `2.2 *Document Type* 📁\n\n` +
-            `${config.FOOTER || "> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ DAWENS BOY🩸*"}`;
+            `🖇 *Url:* ${url || "Unknown"}\n\n` +
+            `🔽 *Reply with your choice:*\n` +
+            `1.1 *Audio Type* 🎵\n` +
+            `1.2 *Document Type* 📁\n\n` +
+            `${config.FOOTER || "> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ DAWENS BOY*"}`;
 
         const sentMsg = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
         const messageID = sentMsg.key.id;
-        await conn.sendMessage(from, { react: { text: '🎥', key: sentMsg.key } });
+        await conn.sendMessage(from, { react: { text: '🎶', key: sentMsg.key } });
 
-        // Écoute réponse unique
+        // Gestion unique de réponse utilisateur
         const listener = async (messageUpdate) => {
             try {
                 const mekInfo = messageUpdate?.messages[0];
@@ -67,29 +67,29 @@ cmd({
 
                 if (!isReplyToSentMsg) return;
 
-                conn.ev.off('messages.upsert', listener);
+                conn.ev.off('messages.upsert', listener); // retire le listener après première réponse
 
                 let userReply = messageType.trim();
                 let msg;
                 let type;
-                let response = await preloadedVideo;
+                let response = await preloadedAudio;
 
                 const downloadUrl = response?.result?.download?.url;
                 if (!downloadUrl) return await reply("❌ Download link not found!");
 
-                if (userReply === "2.1") {
+                if (userReply === "1.1") {
                     msg = await conn.sendMessage(from, { text: "⏳ Processing..." }, { quoted: mek });
-                    type = { video: { url: downloadUrl }, mimetype: "video/mp4", caption: title };
-                } else if (userReply === "2.2") {
+                    type = { audio: { url: downloadUrl }, mimetype: "audio/mpeg" };
+                } else if (userReply === "1.2") {
                     msg = await conn.sendMessage(from, { text: "⏳ Processing..." }, { quoted: mek });
                     type = {
                         document: { url: downloadUrl },
-                        fileName: `${title}.mp4`,
-                        mimetype: "video/mp4",
+                        fileName: `${title}.mp3`,
+                        mimetype: "audio/mpeg",
                         caption: title
                     };
                 } else {
-                    return await reply("❌ Invalid choice! Reply with 2.1 or 2.2.");
+                    return await reply("❌ Invalid choice! Reply with 1.1 or 1.2.");
                 }
 
                 await conn.sendMessage(from, type, { quoted: mek });

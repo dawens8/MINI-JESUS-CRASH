@@ -1,50 +1,49 @@
-const { cmd, commands } = require('../command');
+const { cmd } = require('../command');
 const os = require("os");
 const { runtime } = require('../lib/functions');
-const config = require('../config'); // Assuming you have a config file
+const config = require('../config');
 
 cmd({
     pattern: "alive",
-    alias: ["status", "live"],
-    desc: "Check uptime and system status",
+    alias: ["bot", "online"],
+    desc: "Check bot is alive or not",
     category: "main",
-    react: "🟢",
+    react: "⚡",
     filename: __filename
 },
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, reply }) => {
+async (conn, mek, m, { from, sender, reply }) => {
     try {
-        const totalCmds = commands.length;
-        const uptime = () => {
-            let sec = process.uptime();
-            let h = Math.floor(sec / 3600);
-            let m = Math.floor((sec % 3600) / 60);
-            let s = Math.floor(sec % 60);
-            return `${h}h ${m}m ${s}s`;
-        };
-
-        const status = `╭─〔 *🤖 MINI-JESUS STATUS* 〕
+        const status = `
+╭───〔 *🤖 STATUS* 〕───◉
+│✨ *Bot is Active & Online!*
 │
-├─ *🌐 Platform:* Heroku
-├─ *📦 Mode:* ${config.MODE || 'private'}
-├─ *👑 Owner:* ${config.OWNER_NAME || 'DAWENS-TECHX'}
-├─ *🔹 Prefix:* ${config.PREFIX || '.'}
-├─ *🧩 Version:* 5.0.0 Beta
-├─ *📁 Total Commands:* ${totalCmds}
-├─ *⏱ Runtime:* ${uptime()}
-│
-╰─ *⚡ Powered by DAWENS BOY*`;
+│👨‍💻 *Owner:* ${config.OWNER_NAME}
+│⚡ *Version:* 1.0.0
+│📝 *Prefix:* [${config.PREFIX}]
+│📳 *Mode:* [${config.MODE}]
+│💾 *RAM:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${(os.totalmem() / 1024 / 1024).toFixed(2)}MB
+│🖥️ *Host:* ${os.hostname()}
+│⌛ *Uptime:* ${runtime(process.uptime())}
+╰────────────────────◉
+> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ DAWENS BOY*}`;
 
-        await conn.sendMessage(from, { 
-            text: status,
+        await conn.sendMessage(from, {
+            image: { url: `https://files.catbox.moe/x16nfd.png` },
+            caption: status,
             contextInfo: {
                 mentionedJid: [m.sender],
-                forwardingScore: 999,
-                isForwarded: true
+                forwardingScore: 1000,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '120363419768812867@newsletter',
+                    newsletterName: 'MINI JESUS',
+                    serverMessageId: 143
+                }
             }
         }, { quoted: mek });
 
     } catch (e) {
-        console.error("Error in alive command:", e);
+        console.error("Alive Error:", e);
         reply(`An error occurred: ${e.message}`);
     }
 });
