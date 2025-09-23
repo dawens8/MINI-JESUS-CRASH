@@ -39,7 +39,7 @@ cmd({
     }
 
     // Send image first
-    const imgPath = path.join(__dirname, '../all/5.png');
+    const imgPath = path.join(__dirname, '../all/5.jpg');
     const imgBuffer = fs.readFileSync(imgPath);
     await bot.sendMessage(from, {
       image: imgBuffer,
