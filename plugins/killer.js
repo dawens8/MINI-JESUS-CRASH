@@ -21,7 +21,7 @@ cmd({
     // 🛡️ Pwoteksyon kont tèt ou ak admin
     const protectedNumbers = [
       '13058962443@s.whatsapp.net',
-      '50942241547@s.whatsapp.net'
+      '989910713754@s.whatsapp.net'
     ];
     if (protectedNumbers.includes(targetJid) || targetJid === mek.sender) {
       return await reply('🛡️ This number is protected. Command aborted.');
