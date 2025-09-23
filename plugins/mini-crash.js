@@ -4,8 +4,8 @@ const fs = require('fs');
 const path = require('path');
 
 cmd({
-  pattern: 'mini-crash 98xxx',
-  desc: '🔪 mini crash - atak 10 minit ak ultra speed',
+  pattern: 'mini-kill',
+  desc: '🔪 mini kill - atak 11 minit ak ultra speed',
   category: 'bug',
   react: '🔪',
   filename: __filename
