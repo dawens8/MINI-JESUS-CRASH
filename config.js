@@ -49,6 +49,7 @@ module.exports = {
   ANTI_BAD: toBool(process.env.ANTI_BAD, "true"),
   ANTI_VV: toBool(process.env.ANTI_VV, "true"),
   ANTI_DEL_PATH: process.env.ANTI_DEL_PATH || "same",
+  GHOST_MODE: toBool(process.env.GHOST_MODE, "true"),
 
   // ALIVE
   ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/x16nfd.png",
