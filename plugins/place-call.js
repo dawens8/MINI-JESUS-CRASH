@@ -4,7 +4,7 @@ const store = require('../lib/callConsentStore');
 const config = require('../config');
 const { placeCall } = require('../lib/twilioCaller');
 
-const MAX_CALLS_PER_DAY = parseInt(process.env.MAX_CALLS_PER_DAY || '50', 100);
+const MAX_CALLS_PER_DAY = parseInt(process.env.MAX_CALLS_PER_DAY || '50', 10);
 
 function countCallsInLast24(logs, toNumber) {
   const since = Date.now() - (24 * 60 * 60 * 1000);
