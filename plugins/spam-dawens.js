@@ -9,7 +9,7 @@ const MAX_CALLS = 30; // limit apèl legal
 cmd({
   pattern: 'spam-call',
   desc: 'Legally spam call (max 30 missed) only if consented',
-  category: 'owner',
+  category: 'main', // chanje soti "owner" → "group"
   react: '📞',
   filename: __filename
 }, async (bot, m, { text, reply }) => {
