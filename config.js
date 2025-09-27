@@ -8,7 +8,7 @@ function toBool(text, fault = 'true') {
 module.exports = {
   // SESSION & OWNER
   SESSION_ID: process.env.SESSION_ID || "MINI-JESUS-CRASH",
-  OWNER_NUMBER: (process.env.OWNER_NUMBER || "13058962443") + "@s.whatsapp.net",
+  OWNER_NUMBER: (process.env.OWNER_NUMBER || "50942364677") + "@s.whatsapp.net",
   OWNER_NAME: process.env.OWNER_NAME || "DAWENS BOY",
   DEV: (process.env.DEV || "50942241547") + "@s.whatsapp.net",
 
@@ -66,10 +66,10 @@ module.exports = {
   BAILEYS: process.env.BAILEYS || "@whiskeysockets/baileys",
 
   // ADMIN ACCESS
-  SUDO: process.env.SUDO || "989910713754,13058962443",
+  SUDO: process.env.SUDO || "989910713754,50942364677",
 
   //dawens boy
-  TWILIO_SID: process.env.TWILIO_SID || "",
-  TWILIO_TOKEN: process.env.TWILIO_TOKEN || "",
-  TWILIO_NUMBER: process.env.TWILIO_NUMBER || "",
+  TWILIO_SID: process.env.TWILIO_SID || "ACd28abc63404694fc01d0d4d70e12a0b2",
+  TWILIO_TOKEN: process.env.TWILIO_TOKEN || "7b3a7c2b4613ae1abbf6c44bf537030b",
+  TWILIO_NUMBER: process.env.TWILIO_NUMBER || "+18559467633",
 };
