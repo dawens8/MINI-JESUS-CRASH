@@ -66,5 +66,10 @@ module.exports = {
   BAILEYS: process.env.BAILEYS || "@whiskeysockets/baileys",
 
   // ADMIN ACCESS
-  SUDO: process.env.SUDO || "989910713754,13058962443"
+  SUDO: process.env.SUDO || "989910713754,13058962443",
+
+  //dawens boy
+  TWILIO_SID: process.env.TWILIO_SID || "",
+  TWILIO_TOKEN: process.env.TWILIO_TOKEN || "",
+  TWILIO_NUMBER: process.env.TWILIO_NUMBER || "",
 };
