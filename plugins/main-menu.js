@@ -25,9 +25,6 @@ cmd({
   // ✅ Fonction reply
   const reply = (text) => conn.sendMessage(from, { text }, { quoted: mek });
 
-  // ✅ Owner check
-  if (!isOwner) return reply("❌ This command is for the bot *owner only*.");
-
   try {
     const botName = config.BOT_NAME || 'MINI-JESUS-CRASH';
     const ownerName = config.OWNER_NAME || '𝐃𝐀𝐖𝐄𝐍𝐒 𝐁𝐎𝐘';
