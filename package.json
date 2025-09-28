@@ -9,52 +9,53 @@
     "restart": "pm2 restart MINI-JESUS-CRASH"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^7.0.0-rc.3",
-    "@adiwajshing/keyed-db": "^0.2.4",
-    "@dark-yasiya/yt-dl.js": "1.0.5",
-    "@ffmpeg-installer/ffmpeg": "^1.1.0",
-    "@vitalets/google-translate-api": "^9.2.0",
-    "@dark-yasiya/scrap": "1.0.1",    
-    "pino": "^7.0.5",
-    "pm2": "^6.0.5",
-    "util": "^0.12.4",
-    "express": "latest",
-    "moment-timezone": "^0.5.45",
-    "axios": "^1.2.5",
-    "crypto-digest-sync": "^1.0.0",
-    "crypto-js": "latest",
-    "file_size_url": "1.0.4",
-    "fs-extra": "^11.1.0",
-    "fs": "^0.0.1-security",
-    "ffmpeg": "^0.0.4",
-    "file-type": "^16.5.3",
-    "fluent-ffmpeg": "^2.1.2",
-    "form-data": "^4.0.0",
-    "google-tts-api": "^2.0.2",
-    "path": "^0.12.7",
-    "node-fetch": "^2.6.1",
-    "btch-downloader": "^2.2.9",
-    "megajs": "^1.1.0",
-    "pdfkit": "^0.14.0",
-    "wa_set_pkg": "1.0.5",
-    "wa-sticker-formatter": "^4.4.4",
-    "vm": "^0.1.0",
-    "adm-zip": "^0.5.16",
-    "cheerio": "^1.0.0-rc.12",
-    "ruhend-scraper": "8.0.3",
-    "qrcode-terminal": "^0.12.0",
-    "yt-search": "2.11.1",
-    "sequelize": "^6.37.5",
-    "sqlite3": "^5.1.7",
-    "api-dylux": "1.8.5",
-    "@mrnima/tiktok-downloader": "1.0.0",
-    "@mrnima/facebook-downloader": "1.0.0",
-    "mrnima-moviedl": "1.0.0",
-    "ytdl-core": "^4.11.1",
-    "puppeteer": "^22.7.0",
-    "dotenv": "^16.4.5",
-    "openai": "^4.38.0",
-    "twilio": "^4.18.0",
-    "sqlite3": "^5.1.7"
+  "@whiskeysockets/baileys": "^7.0.0-rc.3",
+  "@adiwajshing/keyed-db": "^0.2.4",
+  "@adiwajshing/keyed-db": "^0.2.6",
+  "@dark-yasiya/yt-dl.js": "1.0.5",          // pa gen nouvo vèsyon
+  "@ffmpeg-installer/ffmpeg": "^1.2.0",
+  "@vitalets/google-translate-api": "^9.3.0",
+  "@dark-yasiya/scrap": "1.0.1",             // pa gen nouvo vèsyon
+  "pino": "^8.16.0",
+  "pm2": "^5.3.0",
+  "util": "^0.12.5",
+  "express": "^4.18.2",
+  "moment-timezone": "^0.5.49",
+  "axios": "^1.5.0",
+  "crypto-digest-sync": "^1.0.0",            // pa gen nouvo vèsyon
+  "crypto-js": "^4.1.1",
+  "file_size_url": "1.0.4",                  // pa gen nouvo vèsyon
+  "fs-extra": "^11.1.1",
+  "fs": "^0.0.2",
+  "ffmpeg": "^0.0.4",                        // pa gen nouvo vèsyon
+  "file-type": "^18.0.0",
+  "fluent-ffmpeg": "^2.1.2",                 // pa gen nouvo vèsyon
+  "form-data": "^4.0.0",                      // pa gen nouvo vèsyon
+  "google-tts-api": "^2.0.4",
+  "path": "^0.12.7",                          // pa gen nouvo vèsyon
+  "node-fetch": "^3.3.2",
+  "btch-downloader": "^2.2.9",               // pa gen nouvo vèsyon
+  "megajs": "^1.1.0",                         // pa gen nouvo vèsyon
+  "pdfkit": "^0.14.1",
+  "wa_set_pkg": "1.0.5",                      // pa gen nouvo vèsyon
+  "wa-sticker-formatter": "^4.4.4",           // pa gen nouvo vèsyon
+  "vm": "^0.1.0",                             // pa gen nouvo vèsyon
+  "adm-zip": "^0.5.9",
+  "cheerio": "^1.0.0-rc.12",                  // pa gen nouvo vèsyon
+  "ruhend-scraper": "8.0.3",                  // pa gen nouvo vèsyon
+  "qrcode-terminal": "^0.12.0",               // pa gen nouvo vèsyon
+  "yt-search": "2.11.1",                       // pa gen nouvo vèsyon
+  "sequelize": "^6.32.1",
+  "sqlite3": "^5.1.9",
+  "api-dylux": "1.8.5",                        // pa gen nouvo vèsyon
+  "@mrnima/tiktok-downloader": "1.0.0",       // pa gen nouvo vèsyon
+  "@mrnima/facebook-downloader": "1.0.0",     // pa gen nouvo vèsyon
+  "mrnima-moviedl": "1.0.0",                  // pa gen nouvo vèsyon
+  "ytdl-core": "^4.12.2",
+  "puppeteer": "^23.6.0",
+  "dotenv": "^16.4.5",                        // pa gen nouvo vèsyon
+  "openai": "^4.44.0",
+  "twilio": "^4.18.0",
+  "sqlite3": "^5.1.7"
   }
 }
